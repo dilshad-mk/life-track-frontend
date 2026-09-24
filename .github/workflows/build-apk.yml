@@ -33,11 +33,14 @@ jobs:
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
 
-      - name: Build Web Assets & Sync Capacitor
+      - name: Build Web Assets
         env:
           VITE_API_BASE_URL: https://life-track-wy17.onrender.com/api
           VITE_USE_MOCK_DATA: false
-        run: npm run cap:sync
+        run: npm run build
+
+      - name: Sync Capacitor Android
+        run: npx cap sync android --inline
 
       - name: Make Gradle executable
         run: chmod +x ./android/gradlew
