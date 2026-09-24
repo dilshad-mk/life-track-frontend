@@ -29,10 +29,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
 
       - name: Install Dependencies
-        run: npm ci || npm install --legacy-peer-deps
+        run: npm install --include=dev --legacy-peer-deps
 
       - name: Build Web Assets
         env:
@@ -41,7 +40,7 @@ jobs:
         run: npm run build
 
       - name: Sync Capacitor Android Project
-        run: npx cap sync android
+        run: npx @capacitor/cli sync android
 
       - name: Make Gradle executable
         run: chmod +x ./android/gradlew
